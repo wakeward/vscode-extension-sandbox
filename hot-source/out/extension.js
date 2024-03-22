@@ -27,19 +27,26 @@ exports.deactivate = exports.activate = void 0;
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = __importStar(require("vscode"));
+// import { Credentials } from './credentials';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 function activate(context) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "hot-source" is now active!');
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('hot-source.helloWorld', () => {
-        // The code you place here will be executed every time your command is executed
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World from hot-source !');
+    const disposable = vscode.commands.registerCommand('hot-source.enum', () => {
+        // get env information
+        const machineId = vscode.env.machineId;
+        const appRoot = vscode.env.appRoot;
+        const appHost = vscode.env.appHost;
+        // print env information in json format
+        console.log(JSON.stringify({ machineId, appRoot, appHost }, null, 2));
+        // get all extensions
+        const extensions = vscode.extensions.all;
+        // get all enabled extensions
+        const enabledExtensions = extensions.filter(extension => extension.isActive);
+        // get all extensions id in json format
+        const extensionIds = enabledExtensions.map(extension => extension.id);
+        console.log(JSON.stringify(extensionIds, null, 2));
+        // print all extension data in json format
+        // console.log(JSON.stringify(enabledExtensions, null, 2));
     });
     context.subscriptions.push(disposable);
 }

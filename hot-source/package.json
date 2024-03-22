@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "hot-source.helloWorld",
-        "title": "Hello World"
+        "command": "hot-source.enum",
+        "title": "Hot Source"
       }
     ]
   },
